@@ -16,8 +16,6 @@ services:
         container_name: greetings_app        
         environment:
             - DB_URL=postgresql://postgres:password@database:5432/task
-        volumes:
-            - ./greetings_app:/greetings_app        
         command: bash -c "pip install -r /greetings_app/requirements.txt && python3 /greetings_app/app.py"
         depends_on:
             - postgres
