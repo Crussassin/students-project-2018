@@ -1,0 +1,31 @@
+version: '2.2'
+services:
+
+    postgres:
+        image: postgres
+        container_name: postgresql
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_DB=task
+        ports:
+            - "5432:5432"
+
+    greetings_app:
+        image: python:3.7.0b5
+        container_name: greetings_app        
+        environment:
+            - DB_URL=postgresql://postgres:password@database:5432/task
+        volumes:
+            - ./greetings_app:/greetings_app        
+        command: bash -c "pip install -r /greetings_app/requirements.txt && python3 /greetings_app/app.py"
+        depends_on:
+            - postgres
+        ports:
+            - "5000:5000"
+
+    nginx_proxy:
+        image: nginx
+        container_name: nginx_proxy
+        ports:
+            - "8080:80"

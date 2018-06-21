@@ -1,9 +1,4 @@
-FROM python:3.7.0b4
-
-RUN apt-get update \
-       && apt-get -y upgrade \
-       && apt-get install -y net-tools iputils-ping \
-       && apt-get install python net-tools -y
+FROM python:3.7.0b5
 
 COPY /greetings_app/* greetings_app/
 
@@ -13,4 +8,4 @@ ENV DB_URL sqlite:///foo.db
 
 
 
-ENTRYPOINT ["python","greetings_app/app.py"]
+entrypoint ["python","greetings_app/app.py"]
