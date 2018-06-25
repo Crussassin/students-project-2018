@@ -1,0 +1,46 @@
+---
+- name: project
+  hosts: localhost 
+  remote_user: root
+  become: yes
+  
+  
+  tasks:
+    - include_vars: ansible-vault
+    - docker_service:
+        project_name: students project 2018
+        recreate: always
+        definition:
+            version: '2'
+            services:
+                postgres:
+                    image: postgres
+                    container_name: postgresql
+                    expose:
+                       - "5000"
+                    environment:
+                        - "POSTGRES_USER= user "
+                        - "POSTGRES_PASSWORD= password "
+                        - POSTGRES_DB=task
+
+
+                greetings_app:
+                    image: python
+                    container_name: greetings_app
+                    environment:
+                        - "DB_URL=postgresql://user:password@postgresql:5432/task"
+                    volumes:
+                        - "{{playbook_dir}}/../greetings_app:/greetings_app"
+                    depends_on:
+                        - postgres
+                    ports:
+                       - "5432:5432"
+                nginx_proxy:
+                    image: nginx
+                    container_name: nginx_proxy
+                    ports:
+                        - "8080:80"
+                    volumes:
+                        - "{{playbook_dir}}/../greetings_app/conf.d:/etc/nginx/conf.d"
+                    depends_on:
+                        - greetings_app
