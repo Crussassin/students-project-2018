@@ -27,7 +27,7 @@ pipelineJob("CD_job") {
     parameters {
 	gitParam('CONTAINER_TAG') {
 	    description('')
-		branch('refs/tags/*')
+	    branch('refs/tags/*')
 	    type('TAG')
 	    sortMode('DESCENDING_SMART')
 	    defaultValue('latest')
