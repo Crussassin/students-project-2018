@@ -10,8 +10,8 @@ node {
 		env.PATH = "${dockerHome}/bin:${env.PATH}"
 	}
 	stage('Checkout') {
-    deleteDir()
-    checkout scm
+	deleteDir()
+	checkout scm
 	}
 	
 	
@@ -29,7 +29,7 @@ node {
 			vaultCredentialsId: 'ansible_vault_credentials'
 			currentBuild.result = 'SUCCESS'
 			} catch (Exception err) {
-            currentBuild.result = 'FAILED'
+		currentBuild.result = 'FAILED'
 			}
 		}
 			
@@ -41,8 +41,8 @@ node {
 			sh "docker pull $IMAGE_NAME:${env.CONTAINER_TAG}"
 			sh "docker run -d --rm -p $APP_HTTP_PORT:$APP_HTTP_PORT --name $CONTAINER_NAME docker.io/$IMAGE_NAME:${env.CONTAINER_TAG}"
 			currentBuild.result = 'SUCCESS'
-			} catch (Exception err) {
-            currentBuild.result = 'FAILED'
+		} catch (Exception err) {
+		currentBuild.result = 'FAILED'
 			}
 		}	
 	
@@ -58,9 +58,9 @@ node {
 			sh "exit 1"
 		}
 		sleep 5
-            currentBuild.result = 'SUCCESS'
-        } catch (Exception err) {
-            currentBuild.result = 'FAILED'
+		currentBuild.result = 'SUCCESS'
+		} catch (Exception err) {
+		currentBuild.result = 'FAILED'
 		}
 
 	}

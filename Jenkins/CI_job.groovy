@@ -39,8 +39,8 @@ node {
 			}
 		currentBuild.result = 'SUCCESS' 
 			} catch (Exception err) {
-                currentBuild.result = 'FAILED'
-        }		 
+			currentBuild.result = 'FAILED'
+		}		 
 	}
 
 	stage('Push to dockerhub') {
@@ -52,4 +52,3 @@ node {
 		}
 	}
 }
-
