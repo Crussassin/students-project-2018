@@ -1,6 +1,4 @@
-def gitUrl = 'https://github.com/crussassin/students-project-2018.git'
-
-pipelineJob("CI_Job") {
+pelineJob("CI_Job") {
 	triggers {
 		scm('H/5 * * * *')
 	}
@@ -9,8 +7,8 @@ pipelineJob("CI_Job") {
 			scm {
 				git {
 					remote {
-						url(gitUrl)
-						credentials("Crussassin-github")
+						url("https://github.com/Crussassin/students-project-2018")
+						credentials("jenkins-github")
 					}
 					branch("refs/tags/*")
 				}
@@ -26,11 +24,10 @@ pipelineJob("CD_job") {
     }
     parameters {
 	gitParam('CONTAINER_TAG') {
-	    description('')
-	    branch('refs/tags/*')
+	    description('Select tag of image')
 	    type('TAG')
 	    sortMode('DESCENDING_SMART')
-	    defaultValue('latest')
+	    defaultValue('')
         }
     }
     definition {
@@ -38,8 +35,8 @@ pipelineJob("CD_job") {
             scm {
                 git {
                     remote {
-                        url(gitUrl)
-                        credentials("Crussassin-github")
+                        url("https://github.com/Crussassin/students-project-2018")
+                        credentials("jenkins-github")
                     }
                     branch("refs/tags/*")
                 }
