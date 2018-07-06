@@ -1,4 +1,4 @@
-pelineJob("CI_Job") {
+pipelineJob("CI_Job") {
 	triggers {
 		scm('H/5 * * * *')
 	}
