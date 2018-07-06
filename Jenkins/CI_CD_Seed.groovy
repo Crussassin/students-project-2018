@@ -8,7 +8,7 @@ pelineJob("CI_Job") {
 				git {
 					remote {
 						url("https://github.com/Crussassin/students-project-2018")
-						credentials("jenkins-github")
+						credentials("Vyacheslav")
 					}
 					branch("refs/tags/*")
 				}
