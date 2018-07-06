@@ -8,7 +8,7 @@ pelineJob("CI_Job") {
 				git {
 					remote {
 						url("https://github.com/Crussassin/students-project-2018")
-						credentials("Vyacheslav")
+						credentials("jenkins-github")
 					}
 					branch("refs/tags/*")
 				}
@@ -36,7 +36,7 @@ pipelineJob("CD_job") {
                 git {
                     remote {
                         url("https://github.com/Crussassin/students-project-2018")
-                        credentials("Vyacheslav")
+                        credentials("jenkins-github")
                     }
                     branch("refs/tags/*")
                 }
